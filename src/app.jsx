@@ -9,7 +9,7 @@ export function App() {
   const [oldNum, setOldNum] = useState(0)
 
   const numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const operacoes = ["*", "/", "+", "-", "=",];
+  const operacoes = ["*", "/", "+", "-"];
 
   const handleNum = (e) => {
     let numClicado = e.target.value;
@@ -27,17 +27,19 @@ export function App() {
   };
 
   const calcular = () => {
-    let resultado;
-    if(operacao == "/") {
-      resultado = parseFloat(oldNum) / parseFloat(num)
-    } 
-    else if(operacao == "*" ) {
-      resultado =(parseFloat(oldNum) * parseFloat(num))
-    }
-    else if(operacao == "-") {   
-      resultado = (oldNum - num)
-    }
-    setNum(resultado)
+
+    // condição ? valor verdadeiro : valor falso
+
+    operacao === "/" // se for divisão
+    ? setNum(parseFloat(oldNum) / parseFloat(num)) // Comando de dividir
+    : operacao === "*" // se for multiplicação
+    ?  setNum(parseFloat(oldNum) * parseFloat(num)) // comando de multiplicar
+    : operacao === "-" // se for subtração
+    ?  setNum(parseFloat(oldNum) - parseFloat(num)) // comando de subtrair
+    : operacao === "+" // se for soma
+    ?  setNum(parseFloat(oldNum) + parseFloat(num)) // comando de somar
+    : false // retorna falso porque não há mais condições para estabelecer
+
   }
 
   const limpar = () => {
@@ -46,10 +48,10 @@ export function App() {
   }
 
   return (
-    <>
-      <h1 className='text-3xl font-bold'>Calculadora</h1>
+    <div>
+      <h1 className='text-3xl font-bold text-center mt-4'>Calculadora</h1>
 
-      <div className='calculadora max-w-md rounded-lg m-auto mt-12'>
+      <div className='max-w-md rounded-lg m-auto mt-12 min-h-96 bg-slate-700'>
         <p className='w-full h-32 rounded-t-lg bg-slate-400 p-6 text-4xl flex justify-end'>
           {num}
         </p>
@@ -92,6 +94,6 @@ export function App() {
           </button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
